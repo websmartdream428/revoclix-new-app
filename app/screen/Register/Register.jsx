@@ -23,9 +23,11 @@ import {
   FacebookSocialButton,
   GoogleSocialButton,
 } from "react-native-social-buttons";
+import { registerApi } from "../../api/auth";
+import useAuth from "../../auth/useAuth";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required().label("Name"),
+  username: Yup.string().required().label("Username"),
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
   subscribe: Yup.boolean().required().isTrue().label("SubScribe"),
@@ -33,6 +35,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Register = () => {
+  const auth = useAuth();
   const [error, setError] = useState();
   const [isSelected, setSelection] = useState({
     subscribe: false,
@@ -40,7 +43,12 @@ const Register = () => {
   });
 
   const handleSubmit = async (userInfo) => {
-    console.log(userInfo);
+    const res = await registerApi(userInfo);
+    if (res.type !== "success") {
+      setError("Network connection error!");
+    } else {
+      auth.logIn(res.token);
+    }
   };
 
   return (
