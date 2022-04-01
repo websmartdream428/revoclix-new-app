@@ -3,6 +3,7 @@ import { Text, View, Image } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SelectDropdown from "react-native-select-dropdown";
+import routes from "../../navigation/routes";
 
 import { Screen, Button } from "../../components";
 import colors from "../../config/colors";
@@ -17,7 +18,7 @@ import {
   WelcomeView,
 } from "./welcome.styles";
 
-const Welcome = () => {
+const Welcome = ({ navigation }) => {
   return (
     <Screen>
       <WelcomeView>
@@ -49,7 +50,7 @@ const Welcome = () => {
             color="white"
             titleStyle={{ color: colors.secondary }}
             style={welcomeStyles.registerButton}
-            onPress={() => navigation.navigate(routes.REGISTER)}
+            onPress={() => navigation.navigate(routes.SIGNUP)}
           />
         </ButtonView>
       </WelcomeView>
