@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import {
   FacebookSocialButton,
   GoogleSocialButton,
-  AppleSocialButton,
 } from "react-native-social-buttons";
 
 import { Screen } from "../../components";
@@ -26,6 +25,7 @@ const Login = () => {
 
   const handleSubmit = async ({ email, password }) => {
     console.log(email, password);
+    setLoginFailed(true);
   };
   return (
     <Screen>
@@ -76,12 +76,12 @@ const Login = () => {
             textStyle={loginStyles.socialBtnText}
             buttonText={"Continue with Google"}
           />
-          <AppleSocialButton
+          {/* <AppleSocialButton
             onPress={() => {}}
             buttonViewStyle={loginStyles.socialButton}
             textStyle={loginStyles.socialBtnText}
             buttonText={"Continue with Apple"}
-          />
+          /> */}
         </View>
       </LoginView>
     </Screen>
